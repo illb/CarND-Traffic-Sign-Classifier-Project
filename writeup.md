@@ -20,11 +20,11 @@ The goals / steps of this project are the following:
 [image1]: ./writeup-data/visualization.png "Visualization"
 [image2]: ./writeup-data/rotations.png "rotations"
 [image3]: ./writeup-data/grayscale.png "grayscale"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image4]: ./writeup-data/01-08.png "Traffic Sign 1"
+[image5]: ./writeup-data/02-14.png "Traffic Sign 2"
+[image6]: ./writeup-data/03-18.png "Traffic Sign 3"
+[image7]: ./writeup-data/04-12.png "Traffic Sign 4"
+[image8]: ./writeup-data/05-33.png "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -77,7 +77,7 @@ The code for this step is contained in the fourth code cell of the IPython noteb
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
 * I used given validation and testing data
-* I added rotated traing images -30, -15, 15, 30 degrees
+* I added rotated traing images -20, -10, 10, 20 degrees
   * to detect signs at various angles
   * my training set was 5 times
 
@@ -99,13 +99,13 @@ My final model consisted of the following layers:
 | RELU					|												|
 | Max pooling			| 2x2 stride, outputs 5x5x16					|
 | Flatten				| outputs 400        							|
-| dropout				| keep probability 0.5							|
+| dropout				| keep probability 0.7							|
 | Fully connected		| outputs 120        							|
 | RELU					|												|
-| dropout				| keep probability 0.5							|
+| dropout				| keep probability 0.7							|
 | Fully connected		| outputs 84        							|
 | RELU					|												|
-| dropout				| keep probability 0.5							|
+| dropout				| keep probability 0.7							|
 | Fully connected		| outputs 43        							|
 | Softmax				|        										| 
 
@@ -120,30 +120,41 @@ The code for training the model is located in the eigth cell of the ipython note
   * learning rate : 0.001
   * decay : 0.9
 * traing operation : minimize cross entropy of softmax probabilites with one hot encoded class ids
-* training dropout keep probability : 0.5
+* training dropout keep probability : 0.7
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
 
-My final model results were:
-* training set accuracy of 0.990
-* validation set accuracy of 0.975 
-* test set accuracy of 0.935
-
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
+  * From lenet, the input channel is increased to 3, allowing color input.
 * What were some problems with the initial architecture?
+  * when colors change cannot detect
+  * rotated images cannot detect
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+  * add grayscale channel
+  * add rotated images (-20, -10, 10, 20 degrees)
+  * normalize images
+  * add dropout (0.7) to avoid overfit
+  * wider layers (2 times)
+  * use xavier initializer to fater training
 * Which parameters were tuned? How were they adjusted and why?
+  * increase epoch to 50
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
 If a well known architecture was chosen:
 * What architecture was chosen?
+  * modified Lenet
 * Why did you believe it would be relevant to the traffic sign application?
+  * Lenet is simple and easy to modofy
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
 
+My final model results were:
+* training set accuracy of 0.989
+* validation set accuracy of 0.958 
+* test set accuracy of 0.944
+ 
 ###Test a Model on New Images
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
@@ -163,11 +174,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Speed limit (80km/h)  | Speed limit (80km/h)    						| 
+| Speed limit (120km/h) | Speed limit (120km/h)    						| 
 | Stop     				| Stop											|
 | General caution		| General caution								|
 | Priority road     	| Priority road					 				|
-| Right-of-way at the next intersection	| Right-of-way at the next intersection	|
+| Turn right ahead		| Turn right ahead								|
 
 The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%.
 
@@ -175,11 +186,11 @@ The model was able to correctly guess 5 of the 5 traffic signs, which gives an a
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-* Speed limit (80km/h)
+* Speed limit (120km/h)
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			| Speed limit (80km/h)							| 
+| 1.0         			| Speed limit (120km/h)							| 
 | .00     				| 												|
 | .00					| 												|
 
@@ -207,11 +218,11 @@ The code for making predictions on my final model is located in the 11th cell of
 | .00     				| 												|
 | .00					| 												|
 
-* Right-of-way at the next intersection
+* Turn right ahead
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			| Right-of-way at the next intersection			| 
+| 1.0         			| Turn right ahead								| 
 | .00     				| 												|
 | .00					| 												|
 
