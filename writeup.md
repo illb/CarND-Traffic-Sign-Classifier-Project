@@ -36,12 +36,10 @@ The goals / steps of this project are the following:
 
 You're reading it! and here is a link to my [project code](https://github.com/illb/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-###Data Set Summary & Exploration3
-![alt text][image2]
-####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the c for any color
-de, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+###Data Set Summary & Exploration
+####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-The code for this step is contained in the second code cell of the IPython notebook.  
+The code for this step is contained in the second code cell of the IPython notebook. 
 
 I used the numpy library to calculate summary statistics of the traffic
 signs data set:
@@ -66,11 +64,11 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 The code for this step is contained in the fourth code cell of the IPython notebook.
 
 
-* step 2) append the gray scale image
+* step 1) append the gray scale image
   * to detect for any color
 ![alt text][image3]
 
-* step 3) normalize images
+* step 2) normalize images
   * move to center, and shrink to a absolute value of 1.0
   * to training faster and to avoid local optima
 
@@ -92,15 +90,15 @@ My final model consisted of the following layers:
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x4 RGB & gray image   					| 
-| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x6 	|
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x12 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride, outputs 14x14x6				 	|
-| Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x16	|
+| Max pooling	      	| 2x2 stride, outputs 14x14x12				 	|
+| Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x32	|
 | RELU					|												|
-| Max pooling			| 2x2 stride, outputs 5x5x16					|
-| Flatten				| outputs 400        							|
+| Max pooling			| 2x2 stride, outputs 5x5x32					|
+| Flatten				| outputs 800        							|
 | dropout				| keep probability 0.7							|
-| Fully connected		| outputs 120        							|
+| Fully connected		| outputs 240        							|
 | RELU					|												|
 | dropout				| keep probability 0.7							|
 | Fully connected		| outputs 84        							|
@@ -115,7 +113,7 @@ My final model consisted of the following layers:
 The code for training the model is located in the eigth cell of the ipython notebook. 
 
 * batch size : 128
-* epochs : 40
+* epochs : 20
 * optimizer : RMSPropOptimizer
   * learning rate : 0.001
   * decay : 0.9
@@ -126,7 +124,16 @@ The code for training the model is located in the eigth cell of the ipython note
 
 The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
 
+
+My final model results were:
+
+* training set accuracy of 0.999
+* validation set accuracy of 0.973 
+* test set accuracy of 0.960
+
+
 If an iterative approach was chosen:
+
 * What was the first architecture that was tried and why was it chosen?
   * From lenet, the input channel is increased to 3, allowing color input.
 * What were some problems with the initial architecture?
@@ -136,24 +143,20 @@ If an iterative approach was chosen:
   * add grayscale channel
   * add rotated images (-20, -10, 10, 20 degrees)
   * normalize images
-  * add dropout (0.7) to avoid overfit
   * wider layers (2 times)
-  * use xavier initializer to fater training
+  * use xavier initializer and RMSPropOptimizer to fater training
 * Which parameters were tuned? How were they adjusted and why?
-  * increase epoch to 50
+  * add dropout and set keep_prob 0.7 to avoid overfit
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
 If a well known architecture was chosen:
+
 * What architecture was chosen?
   * modified Lenet
 * Why did you believe it would be relevant to the traffic sign application?
   * Lenet is simple and easy to modofy
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
-
-My final model results were:
-* training set accuracy of 0.989
-* validation set accuracy of 0.958 
-* test set accuracy of 0.944
+  * validation accuracy and test accuracy are over 96% 
  
 ###Test a Model on New Images
 
