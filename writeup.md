@@ -20,11 +20,11 @@ The goals / steps of this project are the following:
 [image1]: ./writeup-data/visualization.png "Visualization"
 [image2]: ./writeup-data/rotations.png "rotations"
 [image3]: ./writeup-data/grayscale.png "grayscale"
-[image4]: ./writeup-data/01-08.png "Traffic Sign 1"
+[image4]: ./writeup-data/01-38.png "Traffic Sign 1"
 [image5]: ./writeup-data/02-14.png "Traffic Sign 2"
 [image6]: ./writeup-data/03-18.png "Traffic Sign 3"
-[image7]: ./writeup-data/04-12.png "Traffic Sign 4"
-[image8]: ./writeup-data/05-33.png "Traffic Sign 5"
+[image7]: ./writeup-data/04-17.png "Traffic Sign 4"
+[image8]: ./writeup-data/05-35.png "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -127,9 +127,9 @@ The code for calculating the accuracy of the model is located in the ninth cell 
 
 My final model results were:
 
-* training set accuracy of 0.999
-* validation set accuracy of 0.973 
-* test set accuracy of 0.960
+* training set accuracy of 1.000
+* validation set accuracy of 0.966 
+* test set accuracy of 0.967
 
 
 If an iterative approach was chosen:
@@ -167,7 +167,21 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
 
-The first image might be difficult to classify because ...
+The 1st image could be difficult to classify because:
+
+* Sign is on the top left and too small
+
+The 3rd image could be difficult to classify because:
+
+* Lower part is obscured
+
+The 4th image could be difficult to classify because:
+
+* Slightly left moved, not frontal
+
+The 5th image could be difficult to classify because:
+
+* There is a white thing on the right side of the arrow, and the edge of the plate is slightly obscured
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -177,13 +191,13 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Speed limit (120km/h) | Speed limit (120km/h)    						| 
-| Stop     				| Stop											|
-| General caution		| General caution								|
-| Priority road     	| Priority road					 				|
-| Turn right ahead		| Turn right ahead								|
+| Keep right | Speed limit (70km/h)   		| 
+| Stop     				| Stop					|
+| General caution		| General caution		|
+| No Entry    	| No Entry			|
+| Ahead only		| Ahead only				|
 
-The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%.
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%.
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
@@ -193,8 +207,8 @@ The code for making predictions on my final model is located in the 11th cell of
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			| Speed limit (120km/h)							| 
-| .00     				| 												|
+| 0.86         			| Speed limit (70km/h)						| 
+| 0.14     				| Speed limit (30km/h)												|
 | .00					| 												|
 
 * Stop
@@ -202,30 +216,30 @@ The code for making predictions on my final model is located in the 11th cell of
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | 1.0         			| Stop											| 
-| .00     				| 												|
-| .00					| 												|
+| 0.00     				| 												|
+| 0.00					| 												|
 
 * General caution
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			| General caution								| 
-| .00     				| 												|
-| .00					| 												|
+| 1.00         			| General caution								| 
+| 0.00     				| 												|
+| 0.00					| 												|
 
-* Priority road
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| 1.0         			| Priority road									| 
-| .00     				| 												|
-| .00					| 												|
-
-* Turn right ahead
+* No Entry	
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			| Turn right ahead								| 
-| .00     				| 												|
-| .00					| 												|
+| 1.00         			| No Entry									| 
+| 0.00     				| 												|
+| 0.00					| 												|
+
+* Ahead only
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 0.79         			| Ahead only							| 
+| 0.21     				| Go straight or right												|
+| 0.00					| 												|
 
