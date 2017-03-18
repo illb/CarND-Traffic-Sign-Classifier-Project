@@ -203,7 +203,7 @@ The model was able to correctly guess 4 of the 5 traffic signs, which gives an a
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-* Speed limit (120km/h)
+* Keep right
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
